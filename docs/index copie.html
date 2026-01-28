@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectX - Solutions Telecom Nouvelle Generation</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           VARIABLES CSS & RESET
+        ============================================ */
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #9d5ffe;
+            --primary-dark: #5b21b6;
+            --secondary: #0891b2;
+            --accent: #ec4899;
+            --accent-alt: #f97316;
+            --dark: #ffffff;
+            --dark-light: #f5f5f5;
+            --dark-surface: #eeeeee;
+            --dark-elevated: #e0e0e0;
+            --text-light: #1a1a1a;
+            --text-secondary: #404040;
+            --text-muted: #666666;
+            --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #9d5ffe 50%, #0891b2 100%);
+            --gradient-hero: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #f97316 100%);
+            --gradient-accent: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+            --gradient-dark: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+            --glass-bg: rgba(124, 58, 237, 0.08);
+            --glass-border: rgba(124, 58, 237, 0.2);
+            --glow-primary: 0 0 80px rgba(124, 58, 237, 0.3);
+            --glow-secondary: 0 0 80px rgba(8, 145, 178, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f9f5ff 50%, #f0f9ff 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.7;
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND
+        ============================================ */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient-layer {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% -20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 0%, rgba(8, 145, 178, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 30% at 50% 100%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 70% 60% at 100% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, #ffffff 0%, #f9f5ff 100%);
+        }
+
+        .floating-orbs {
+            position: absolute;
+            inset: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: floatOrb 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(124, 58, 237, 0.15);
+            top: -20%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(8, 145, 178, 0.12);
+            top: 50%;
+            right: -15%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: rgba(236, 72, 153, 0.1);
+            bottom: -10%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        .orb-4 {
+            width: 300px;
+            height: 300px;
+            background: rgba(249, 115, 22, 0.1);
+            top: 40%;
+            left: 10%;
+            animation-delay: -15s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(80px, -50px) scale(1.08); }
+            50% { transform: translate(-50px, 80px) scale(0.92); }
+            75% { transform: translate(-80px, -40px) scale(1.05); }
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        /* ============================================
+           NAVBAR
+        ============================================ */
+        .navbar-custom {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0);
+            overflow: visible;
+        }
+
+        .navbar-custom.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+            padding: 0.75rem 0;
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-icon::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: var(--dark);
+            border-radius: 10px;
+            z-index: 0;
+        }
+
+        .brand-icon i {
+            position: relative;
+            z-index: 1;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link-custom {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem !important;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-custom::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link-custom:hover {
+            color: var(--text-light) !important;
+        }
+
+        .nav-link-custom:hover::after {
+            width: 70%;
+        }
+
+        .btn-nav {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-primary);
+            color: white;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 28px;
+            height: 20px;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after,
+        .navbar-toggler-icon span {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before { top: 0; }
+        .navbar-toggler-icon span { top: 50%; transform: translateY(-50%); }
+        .navbar-toggler-icon::after { bottom: 0; }
+
+        /* ============================================
+           HERO SECTION
+        ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 0 80px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #06b6d4;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.8); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 15px rgba(6, 182, 212, 0); }
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 540px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-custom {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 14px;
+            font-weight: 600;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-primary);
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            border-radius: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-secondary-custom:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            color: white;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-phone {
+            position: relative;
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(145deg, #1a1a24, #242430);
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow:
+                0 50px 100px -20px rgba(0, 0, 0, 0.5),
+                0 30px 60px -30px rgba(124, 58, 237, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: floatDevice 6s ease-in-out infinite;
+        }
+
+        @keyframes floatDevice {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 28px;
+            background: #0a0a0f;
+            border-radius: 20px;
+        }
+
+        .phone-content {
+            position: absolute;
+            inset: 60px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .phone-signal {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signal-bar {
+            width: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+        }
+
+        .signal-bar:nth-child(1) { height: 8px; }
+        .signal-bar:nth-child(2) { height: 12px; }
+        .signal-bar:nth-child(3) { height: 16px; }
+        .signal-bar:nth-child(4) { height: 20px; }
+        .signal-bar:nth-child(5) { height: 24px; }
+
+        .phone-speed {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .speed-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .speed-unit {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        .phone-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .phone-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .phone-feature i {
+            font-size: 1.25rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Floating Cards Around Phone */
+        .floating-card {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: floatCard 4s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            left: -30%;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 30%;
+            right: -40%;
+            animation-delay: -1s;
+        }
+
+        .floating-card-3 {
+            bottom: 10%;
+            left: -20%;
+            animation-delay: -2s;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .card-icon.secondary {
+            background: var(--gradient-accent);
+        }
+
+        .card-content span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .card-content strong {
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           SECTION COMMON STYLES
+        ============================================ */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #5b21b6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ============================================
+           SERVICES SECTION
+        ============================================ */
+        .services {
+            background: linear-gradient(135deg, #ffffff 0%, #faf5ff 50%, #f0f9ff 100%);
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(124, 58, 237, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(124, 58, 237, 0.5);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+            background: #ffffff;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--dark-surface);
+            border-radius: 17px;
+        }
+
+        .service-icon i {
+            position: relative;
+            z-index: 1;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .service-features li i {
+            color: var(--secondary);
+            font-size: 0.875rem;
+        }
+
+        /* ============================================
+           FEATURES SECTION
+        ============================================ */
+        .features {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .feature-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(124, 58, 237, 0.15);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: #ffffff;
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateX(12px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .feature-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .network-animation {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+
+        .network-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--glow-primary);
+            z-index: 2;
+        }
+
+        .network-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid var(--glass-border);
+            border-radius: 50%;
+            animation: pulseRing 3s ease-out infinite;
+        }
+
+        .network-ring:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            animation-delay: 0s;
+        }
+
+        .network-ring:nth-child(2) {
+            width: 280px;
+            height: 280px;
+            animation-delay: 0.5s;
+        }
+
+        .network-ring:nth-child(3) {
+            width: 360px;
+            height: 360px;
+            animation-delay: 1s;
+        }
+
+        @keyframes pulseRing {
+            0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .network-node {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--dark-surface);
+            border: 2px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            animation: floatNode 4s ease-in-out infinite;
+        }
+
+        .network-node:nth-child(4) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .network-node:nth-child(5) { top: 50%; right: 0; transform: translateY(-50%); animation-delay: -1s; }
+        .network-node:nth-child(6) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: -2s; }
+        .network-node:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); animation-delay: -3s; }
+
+        @keyframes floatNode {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ============================================
+           PRICING SECTION
+        ============================================ */
+        .pricing {
+            background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .toggle-label.active {
+            color: var(--text-light);
+        }
+
+        .toggle-switch {
+            width: 60px;
+            height: 32px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            left: calc(100% - 28px);
+        }
+
+        .pricing-save {
+            background: var(--gradient-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(124, 58, 237, 0.15);
+            border-radius: 24px;
+            padding: 2.5rem;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(145deg, rgba(124, 58, 237, 0.08), rgba(8, 145, 178, 0.06));
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.15);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .pricing-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .pricing-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .pricing-amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: auto;
+            align-self: flex-end;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li i {
+            color: var(--secondary);
+        }
+
+        .pricing-features li.disabled {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .pricing-features li.disabled i {
+            color: var(--text-muted);
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pricing-primary {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+        }
+
+        .btn-pricing-primary:hover {
+            box-shadow: var(--glow-primary);
+            color: white;
+        }
+
+        .btn-pricing-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+        }
+
+        .btn-pricing-secondary:hover {
+            background: var(--glass-bg);
+            border-color: rgba(124, 58, 237, 0.3);
+            color: white;
+        }
+
+        /* ============================================
+           TESTIMONIALS SECTION
+        ============================================ */
+        .testimonials {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            padding: 2rem 0;
+        }
+
+        .testimonials-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            min-width: 400px;
+            max-width: 400px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            scroll-snap-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: translateY(-8px);
+            background: #ffffff;
+            box-shadow: 0 12px 32px rgba(124, 58, 237, 0.12);
+        }
+
+        .testimonial-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-rating i {
+            color: #ffc107;
+            font-size: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .author-info h5 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info span {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* ============================================
+           STATS SECTION
+        ============================================ */
+        .stats {
+            background: linear-gradient(135deg, #7c3aed 0%, #0891b2 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            padding: 100px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(145deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 32px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(124, 58, 237, 0.15);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            animation: rotateBg 30s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+        ============================================ */
+        .contact {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--primary-light);
+        }
+
+        .contact-text strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text span {
+            color: var(--text-muted);
+        }
+
+        .contact-form-wrapper {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-floating > .form-control,
+        .form-floating > .form-select {
+            background: #f5f5f5;
+            border: 2px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            color: var(--text-light);
+            padding: 1rem 1rem;
+            height: auto;
+        }
+
+        .form-floating > .form-control:focus,
+        .form-floating > .form-select:focus {
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            color: var(--text-light);
+        }
+
+        .form-floating > label {
+            color: var(--text-muted);
+            padding: 1rem;
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: var(--primary-light);
+            transform: scale(0.85) translateY(-0.75rem) translateX(0.15rem);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .footer {
+            background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 80px 0 30px;
+            border-top: 2px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .navbar-brand {
+            margin-bottom: 1rem;
+            display: inline-flex;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        .footer-column h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--text-light);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+        ============================================ */
+        @media (max-width: 1200px) {
+            .floating-card {
+                display: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .feature-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .feature-visual {
+                order: -1;
+            }
+
+            .network-animation {
+                width: 300px;
+                height: 300px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .hero-title {
+                text-align: center;
+            }
+
+            .hero-description {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                margin-top: 3rem;
+            }
+
+            .hero-phone {
+                width: 240px;
+                height: 480px;
+            }
+
+            .testimonial-card {
+                min-width: 320px;
+                max-width: 320px;
+            }
+
+            .stat-value {
+                font-size: 2.5rem;
+            }
+
+            .cta-box {
+                padding: 2rem;
+            }
+
+            .footer-grid {
+                gap: 3rem;
+                margin-bottom: 3rem;
+            }
+
+            .footer-brand {
+                text-align: center;
+                margin-bottom: 2rem;
+                padding-bottom: 2.5rem;
+                border-bottom: 2px solid var(--primary);
+            }
+
+            .footer-brand .navbar-brand {
+                justify-content: center;
+                margin-bottom: 1.5rem;
+                font-size: 1.4rem;
+                gap: 0.6rem;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .footer-brand p {
+                font-size: 0.92rem;
+                line-height: 1.7;
+                margin-bottom: 1.5rem;
+                color: var(--text-secondary);
+            }
+
+            .social-links {
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 0;
+            }
+
+            .social-link {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+
+            .footer-column {
+                text-align: center;
+                padding: 2rem 0;
+                border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+            }
+
+            .footer-column:last-child {
+                border-bottom: none;
+            }
+
+            .footer-column h5 {
+                margin-bottom: 1.5rem;
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--primary-light);
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+            }
+
+            .footer-links {
+                gap: 0.8rem;
+            }
+
+            .footer-links li {
+                margin: 0;
+            }
+
+            .footer-links a {
+                font-size: 0.95rem;
+                padding: 0.3rem 0;
+            }
+
+            .footer-bottom {
+                gap: 1.5rem;
+                padding-top: 2.5rem;
+                border-top: 2px solid var(--primary);
+                margin-top: 1rem;
+            }
+
+            .footer-bottom p {
+                margin: 0;
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                font-weight: 500;
+            }
+
+            .footer-bottom-links {
+                gap: 1.25rem;
+                justify-content: center;
+            }
+
+            .footer-bottom-links a {
+                font-size: 0.85rem;
+                color: var(--text-secondary);
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .footer-bottom-links a:hover {
+                color: var(--primary-light);
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding-top: 55px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary-custom,
+            .btn-secondary-custom {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem 1rem;
+            }
+
+            .pricing-card {
+                padding: 1.25rem;
+            }
+
+            .service-card {
+                padding: 1.25rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.75rem, 5vw, 2.5rem);
+                margin-bottom: 1rem;
+            }
+
+            .section-title {
+                font-size: clamp(1.25rem, 3vw, 1.75rem);
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.75rem;
+            }
+
+            .pricing-toggle {
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .pricing-amount {
+                font-size: 3rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.85rem;
+            }
+
+            .cta-box h2 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+
+            .cta-box p {
+                font-size: 1rem;
+            }
+
+            .contact-form-wrapper {
+                padding: 1.25rem;
+            }
+
+            .form-floating > .form-control,
+            .form-floating > .form-select {
+                padding: 0.75rem 0.75rem;
+            }
+
+            .footer {
+                padding: 40px 0 25px;
+            }
+
+            .footer-grid {
+                gap: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-brand {
+                padding-bottom: 2rem;
+                margin-bottom: 1.5rem;
+                border-bottom: 2px solid var(--primary);
+            }
+
+            .footer-brand .navbar-brand {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+                gap: 0.5rem;
+            }
+
+            .brand-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+
+            .footer-brand p {
+                font-size: 0.9rem;
+                margin-bottom: 1.25rem;
+                line-height: 1.6;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+
+            .social-link {
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
+
+            .footer-column {
+                padding: 1.75rem 0;
+                border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+            }
+
+            .footer-column:last-child {
+                border-bottom: none;
+            }
+
+            .footer-column h5 {
+                margin-bottom: 1.25rem;
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--primary-light);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .footer-links {
+                gap: 0.7rem;
+            }
+
+            .footer-links li {
+                margin-bottom: 0;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 0.3rem 0;
+            }
+
+            .footer-bottom {
+                gap: 1.25rem;
+                padding-top: 2rem;
+                border-top: 2px solid var(--primary);
+                margin-top: 1rem;
+            }
+
+            .footer-bottom p {
+                font-size: 0.85rem;
+            }
+
+            .footer-bottom-links {
+                gap: 1rem;
+            }
+
+            .footer-bottom-links a {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 40px 0;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .brand-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+
+            .btn-nav {
+                padding: 0.6rem 1.25rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.5rem, 4vw, 2.2rem);
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .pricing-card {
+                padding: 1rem;
+            }
+
+            .pricing-header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .pricing-name {
+                font-size: 1.25rem;
+            }
+
+            .pricing-amount {
+                font-size: 2.5rem;
+            }
+
+            .pricing-features li {
+                padding: 0.5rem 0;
+                font-size: 0.85rem;
+            }
+
+            .contact-grid {
+                gap: 2rem;
+            }
+
+            .contact-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .cta-box {
+                padding: 1.5rem;
+            }
+
+            .footer {
+                padding: 35px 0 20px;
+            }
+
+            .footer-grid {
+                gap: 2rem;
+            }
+
+            .footer-brand {
+                padding-bottom: 1.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-brand .navbar-brand {
+                font-size: 1.15rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .brand-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 0.95rem;
+            }
+
+            .footer-brand p {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+
+            .social-links {
+                gap: 0.7rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+
+            .footer-column {
+                padding: 1.5rem 0;
+            }
+
+            .footer-column h5 {
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.5px;
+            }
+
+            .footer-links {
+                gap: 0.6rem;
+            }
+
+            .footer-links a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0;
+            }
+
+            .footer-bottom {
+                gap: 1rem;
+                padding-top: 1.5rem;
+                margin-top: 0.5rem;
+            }
+
+            .footer-bottom p {
+                font-size: 0.8rem;
+            }
+
+            .footer-bottom-links {
+                gap: 0.8rem;
+            }
+
+            .footer-bottom-links a {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Chargement...</p>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animated">
+        <div class="bg-gradient-layer"></div>
+        <div class="floating-orbs">
+           <div class="orb-wrap orb-1"><div class="orb"></div></div>
+<div class="orb-wrap orb-2"><div class="orb"></div></div>
+<div class="orb-wrap orb-3"><div class="orb"></div></div>
+<div class="orb-wrap orb-4"><div class="orb"></div></div>
+        </div>
+        <div class="grid-pattern"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="brand-icon">
+                    <i class="bi bi-broadcast"></i>
+                </div>
+                ConnectX
+            </a>
+          
+            <button class="navbar-toggler" type="button"
+  data-bs-toggle="collapse" data-bs-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Ouvrir le menu">
+  <span class="navbar-toggler-icon-custom" aria-hidden="true">
+    <span></span>
+  </span>
+</button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#fonctionnalites">Fonctionnalites</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#tarifs">Tarifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-nav">
+                    <i class="bi bi-telephone me-2"></i>
+                    Nous contacter
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="hero-badge">
+                            <span class="badge-dot"></span>
+                            Operateur Telecom Nouvelle Generation
+                        </div>
+                        <h1 class="hero-title">
+                            Connectez-vous au <span class="gradient-text">futur</span> des telecommunications
+                        </h1>
+                        <p class="hero-description">
+                            Decouvrez une experience de connectivite inegalee avec nos solutions 5G ultra-rapides,
+                            notre reseau fibre optique et nos forfaits adaptes a tous vos besoins.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#tarifs" class="btn-primary-custom">
+                                <i class="bi bi-rocket-takeoff"></i>
+                                Voir nos offres
+                            </a>
+                            <a href="#services" class="btn-secondary-custom">
+                                <i class="bi bi-play-circle"></i>
+                                Decouvrir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="hero-image-container">
+                            <div class="hero-phone">
+                                <div class="phone-screen">
+                                    <div class="phone-notch"></div>
+                                    <div class="phone-content">
+                                        <div class="phone-signal">
+                                            <div class="signal-bar"></div>
+                                            <div class="signal-bar"></div>
+                                            <div class="signal-bar"></div>
+                                            <div class="signal-bar"></div>
+                                            <div class="signal-bar"></div>
+                                            <span style="margin-left: auto; font-size: 0.75rem;">5G+</span>
+                                        </div>
+                                        <div class="phone-speed">
+                                            <div class="speed-value">1.8</div>
+                                            <div class="speed-unit">Gbps</div>
+                                        </div>
+                                        <div class="phone-features">
+                                            <div class="phone-feature">
+                                                <i class="bi bi-wifi"></i>
+                                                WiFi 7
+                                            </div>
+                                            <div class="phone-feature">
+                                                <i class="bi bi-shield-check"></i>
+                                                Securise
+                                            </div>
+                                            <div class="phone-feature">
+                                                <i class="bi bi-infinity"></i>
+                                                Illimite
+                                            </div>
+                                            <div class="phone-feature">
+                                                <i class="bi bi-headset"></i>
+                                                Support 24/7
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Cards -->
+                            <div class="floating-card floating-card-1">
+                                <div class="card-icon">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                </div>
+                                <div class="card-content">
+                                    <span>Debit maximum</span>
+                                    <strong>10 Gbps</strong>
+                                </div>
+                            </div>
+                            <div class="floating-card floating-card-2">
+                                <div class="card-icon secondary">
+                                    <i class="bi bi-globe2"></i>
+                                </div>
+                                <div class="card-content">
+                                    <span>Couverture</span>
+                                    <strong>99.9%</strong>
+                                </div>
+                            </div>
+                            <div class="floating-card floating-card-3">
+                                <div class="card-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <div class="card-content">
+                                    <span>Latence</span>
+                                    <strong>< 1ms</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">
+                    <i class="bi bi-stars"></i>
+                    Nos Services
+                </span>
+                <h2 class="section-title">Solutions telecom completes</h2>
+                <p class="section-description">
+                    Des solutions innovantes pour particuliers et entreprises,
+                    concues pour repondre a tous vos besoins de connectivite.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h3>Forfaits Mobile 5G</h3>
+                        <p>Profitez de la puissance du reseau 5G avec nos forfaits mobiles ultra-performants.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Internet 5G illimite</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels & SMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Roaming international</li>
+                            <li><i class="bi bi-check-circle-fill"></i> eSIM compatible</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-router"></i>
+                        </div>
+                        <h3>Fibre Optique</h3>
+                        <p>La fibre optique jusqu'a 10 Gbps pour une connexion internet ultra-rapide.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Debit jusqu'a 10 Gbps</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Installation gratuite</li>
+                            <li><i class="bi bi-check-circle-fill"></i> WiFi 7 inclus</li>
+                            <li><i class="bi bi-check-circle-fill"></i> TV connectee</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h3>Solutions Entreprise</h3>
+                        <p>Des solutions sur mesure pour les PME et grandes entreprises.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Liaisons dediees</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Cloud & Hebergement</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Securite avancee</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support prioritaire</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-tv"></i>
+                        </div>
+                        <h3>TV & Streaming</h3>
+                        <p>Plus de 200 chaines et acces aux meilleures plateformes de streaming.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 200+ chaines HD/4K</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Replay 30 jours</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Multi-ecrans</li>
+                            <li><i class="bi bi-check-circle-fill"></i> VOD incluse</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h3>Cybersecurite</h3>
+                        <p>Protection complete de vos donnees et appareils connectes.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Antivirus premium</li>
+                            <li><i class="bi bi-check-circle-fill"></i> VPN securise</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Controle parental</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Protection identite</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-house-gear"></i>
+                        </div>
+                        <h3>Maison Connectee</h3>
+                        <p>Transformez votre maison en smart home avec nos solutions IoT.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Hub domotique</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Cameras connectees</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Thermostats intelligents</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Eclairage connecte</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="fonctionnalites">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-content" data-aos="fade-right">
+                    <span class="section-badge">
+                        <i class="bi bi-lightning-charge"></i>
+                        Technologie
+                    </span>
+                    <h2>Un reseau de <span class="gradient-text">nouvelle generation</span></h2>
+                    <p>
+                        Notre infrastructure de pointe vous garantit une connectivite exceptionnelle,
+                        ou que vous soyez. Profitez d'une technologie qui vous propulse vers l'avenir.
+                    </p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-speedometer2"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Ultra Haut Debit</h4>
+                                <p>Jusqu'a 10 Gbps en fibre et 1.8 Gbps en 5G</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-globe-americas"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Couverture Nationale</h4>
+                                <p>99.9% du territoire couvert par notre reseau</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Latence Minimale</h4>
+                                <p>Moins d'1ms pour une reactivite optimale</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-visual" data-aos="fade-left">
+                    <div class="network-animation">
+                        <div class="network-ring"></div>
+                        <div class="network-ring"></div>
+                        <div class="network-ring"></div>
+                        <div class="network-node"><i class="bi bi-phone"></i></div>
+                        <div class="network-node"><i class="bi bi-laptop"></i></div>
+                        <div class="network-node"><i class="bi bi-tv"></i></div>
+                        <div class="network-node"><i class="bi bi-smartwatch"></i></div>
+                        <div class="network-center">
+                            <i class="bi bi-broadcast"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="5">0</div>
+                        <div class="stat-label">Millions de clients</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="99.9">0</div>
+                        <div class="stat-label">% de disponibilite</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="50">0</div>
+                        <div class="stat-label">Pays couverts</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="24">0</div>
+                        <div class="stat-label">Support 24h/7j</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="tarifs">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">
+                    <i class="bi bi-tag"></i>
+                    Tarifs
+                </span>
+                <h2 class="section-title">Des forfaits adaptes a vos besoins</h2>
+                <p class="section-description">
+                    Choisissez l'offre qui vous correspond parmi nos forfaits sans engagement.
+                </p>
+            </div>
+
+            <div class="pricing-toggle" data-aos="fade-up">
+                <span class="toggle-label active">Mensuel</span>
+                <div class="toggle-switch" id="pricingToggle"></div>
+                <span class="toggle-label">Annuel</span>
+                <span class="pricing-save">-20%</span>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Essentiel</h3>
+                            <p class="pricing-description">Ideal pour une utilisation basique</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="19" data-yearly="15">19</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 50 Go 5G</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites France</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 5 Go Europe</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> Roaming monde</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> Support prioritaire</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-secondary">Choisir ce forfait</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card featured">
+                        <span class="pricing-badge">Populaire</span>
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Premium</h3>
+                            <p class="pricing-description">Notre offre la plus populaire</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="39" data-yearly="31">39</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 150 Go 5G</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites France</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 20 Go Europe</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 10 Go Monde</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support prioritaire</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-primary">Choisir ce forfait</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Ultimate</h3>
+                            <p class="pricing-description">Pour les utilisateurs intensifs</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="59" data-yearly="47">59</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Data 5G illimitee</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites monde</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 50 Go Europe</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 30 Go Monde</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support VIP 24/7</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-secondary">Choisir ce forfait</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">
+                    <i class="bi bi-chat-quote"></i>
+                    Temoignages
+                </span>
+                <h2 class="section-title">Ce que disent nos clients</h2>
+            </div>
+            <div class="testimonials-slider" data-aos="fade-up">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Depuis que je suis passe chez ConnectX, ma connexion est incroyablement rapide.
+                        Le service client est reactif et les prix sont tres competitifs."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ML</div>
+                        <div class="author-info">
+                            <h5>Marie Laurent</h5>
+                            <span>Freelance Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "La fibre ConnectX a transforme notre facon de travailler.
+                        Nous avons enfin une connexion a la hauteur de nos ambitions."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PD</div>
+                        <div class="author-info">
+                            <h5>Pierre Dubois</h5>
+                            <span>Directeur Tech - StartupXY</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Excellent rapport qualite-prix ! La 5G est vraiment rapide et
+                        la couverture est parfaite meme dans les zones rurales."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SB</div>
+                        <div class="author-info">
+                            <h5>Sophie Bernard</h5>
+                            <span>Veterinaire</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "L'installation de la fibre a ete rapide et professionnelle.
+                        Je recommande vivement ConnectX pour la qualite de leur service."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h5>Jean Martin</h5>
+                            <span>Gamer Pro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box" data-aos="zoom-in">
+                <h2>Pret a rejoindre la <span class="gradient-text">revolution</span> ?</h2>
+                <p>
+                    Souscrivez des maintenant et beneficiez de 3 mois offerts sur votre premier forfait.
+                    Sans engagement, sans mauvaise surprise.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#tarifs" class="btn-primary-custom">
+                        <i class="bi bi-rocket-takeoff"></i>
+                        Souscrire maintenant
+                    </a>
+                    <a href="#contact" class="btn-secondary-custom">
+                        <i class="bi bi-telephone"></i>
+                        Etre rappele
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Contactez-nous</h3>
+                    <p>
+                        Notre equipe est disponible pour repondre a toutes vos questions
+                        et vous accompagner dans le choix de votre offre.
+                    </p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Adresse</strong>
+                                <span>123 Avenue des Telecommunications, 75001 Paris</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Telephone</strong>
+                                <span>0 800 123 456 (appel gratuit)</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Email</strong>
+                                <span>contact@connectx.fr</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Horaires</strong>
+                                <span>Lun-Sam: 8h-20h | Dim: 10h-18h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="firstName" placeholder="Prenom" required>
+                                    <label for="firstName">Prenom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="lastName" placeholder="Nom" required>
+                                    <label for="lastName">Nom</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="tel" class="form-control" id="phone" placeholder="Telephone">
+                            <label for="phone">Telephone</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="subject" required>
+                                <option value="" disabled selected>Selectionnez un sujet</option>
+                                <option value="forfait">Question sur les forfaits</option>
+                                <option value="fibre">Installation fibre</option>
+                                <option value="support">Support technique</option>
+                                <option value="entreprise">Offre entreprise</option>
+                                <option value="autre">Autre demande</option>
+                            </select>
+                            <label for="subject">Sujet</label>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" placeholder="Message" style="height: 120px" required></textarea>
+                            <label for="message">Votre message</label>
+                        </div>
+                        <button type="submit" class="btn-primary-custom w-100">
+                            <i class="bi bi-send"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="navbar-brand" href="#">
+                        <div class="brand-icon">
+                            <i class="bi bi-broadcast"></i>
+                        </div>
+                        ConnectX
+                    </a>
+                    <p>
+                        ConnectX est votre partenaire de confiance pour tous vos besoins
+                        en telecommunications. Nous nous engageons a vous offrir la meilleure
+                        connectivite possible.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Forfaits Mobile</a></li>
+                        <li><a href="#">Fibre Optique</a></li>
+                        <li><a href="#">TV & Streaming</a></li>
+                        <li><a href="#">Securite</a></li>
+                        <li><a href="#">Entreprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Espace client</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Reclamations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Entreprise</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">Carrieres</a></li>
+                        <li><a href="#">Presse</a></li>
+                        <li><a href="#">Investisseurs</a></li>
+                        <li><a href="#">Developpement durable</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ConnectX. Tous droits reserves.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions legales</a>
+                    <a href="#">Confidentialite</a>
+                    <a href="#">CGV</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script  src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script >
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    const navCollapse = document.querySelector('.navbar-collapse');
+                    if (navCollapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(navCollapse).hide();
+                    }
+                }
+            });
+        });
+
+        // Pricing toggle
+        const pricingToggle = document.getElementById('pricingToggle');
+        const toggleLabels = document.querySelectorAll('.toggle-label');
+        const priceAmounts = document.querySelectorAll('.pricing-amount');
+
+        pricingToggle.addEventListener('click', () => {
+  const isYearly = pricingToggle.classList.toggle('active');
+
+  const [monthlyLabel, yearlyLabel] = toggleLabels;
+  monthlyLabel.classList.toggle('active', !isYearly);
+  yearlyLabel.classList.toggle('active', isYearly);
+
+  priceAmounts.forEach(amount => {
+    amount.textContent = isYearly ? amount.dataset.yearly : amount.dataset.monthly;
+  });
+});
+
+
+        // Stats counter animation
+        const statValues = document.querySelectorAll('.stat-value');
+
+        const animateCounter = (el, target) => {
+            const duration = 2000;
+            const start = performance.now();
+            const isDecimal = target % 1 !== 0;
+
+            const update = (currentTime) => {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = target * easeOutQuart;
+
+                el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = isDecimal ? target.toFixed(1) : target;
+                }
+            };
+
+            requestAnimationFrame(update);
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseFloat(entry.target.dataset.count);
+                    animateCounter(entry.target, target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statValues.forEach(stat => statsObserver.observe(stat));
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Merci pour votre message ! Nous vous recontacterons rapidement.');
+            e.target.reset();
+        });
+
+        // Parallax effect for orbs
+       document.addEventListener('mousemove', (e) => {
+  const wraps = document.querySelectorAll('.orb-wrap');
+  const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+  wraps.forEach((wrap, index) => {
+    const speed = 12 + index * 6;
+    wrap.style.setProperty('--mx', `${mouseX * speed}px`);
+    wrap.style.setProperty('--my', `${mouseY * speed}px`);
+  });
+});
+
+
+        console.log('ConnectX - Site Telecom charge avec succes!');
+    </script>
+</body>
+</html>

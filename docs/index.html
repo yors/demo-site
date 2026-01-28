@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectX - Solutions Telecom Nouvelle Generation</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #f43f5e;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --gradient-accent: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-primary: 0 10px 40px -10px rgba(99, 102, 241, 0.4);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* Background */
+        .bg-animated {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+        }
+        .shape-1 { width: 500px; height: 500px; background: rgba(99, 102, 241, 0.2); top: -10%; right: -5%; }
+        .shape-2 { width: 400px; height: 400px; background: rgba(6, 182, 212, 0.2); bottom: -5%; left: -5%; }
+        .shape-3 { width: 300px; height: 300px; background: rgba(244, 63, 94, 0.15); top: 50%; left: 40%; }
+
+        /* ============================================
+           NAVBAR - CORRIGE - TOUJOURS VISIBLE
+        ============================================ */
+        .navbar-custom {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0.75rem 0;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        .navbar-custom.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .brand-icon {
+            width: 36px; height: 36px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+            .brand-icon {
+                width: 32px; height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+        .nav-link-custom {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            font-size: 0.95rem;
+        }
+        .nav-link-custom:hover { color: var(--primary) !important; }
+        .btn-nav {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: white !important;
+            box-shadow: var(--shadow-primary);
+        }
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        /* Mobile Menu Button - TOUJOURS VISIBLE SUR MOBILE */
+        .mobile-menu-btn {
+            display: none;
+            width: 42px; height: 42px;
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1003;
+            transition: all 0.2s ease;
+        }
+        .mobile-menu-btn:hover {
+            border-color: var(--primary);
+            background: var(--gray-50);
+        }
+        .mobile-menu-btn:active {
+            transform: scale(0.95);
+        }
+        @media (max-width: 991px) {
+            .mobile-menu-btn {
+                display: flex !important;
+            }
+            .desktop-nav {
+                display: none !important;
+            }
+        }
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                width: 38px; height: 38px;
+            }
+            .menu-icon {
+                width: 18px; height: 12px;
+            }
+        }
+        .menu-icon {
+            width: 20px; height: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-icon span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .mobile-menu-btn.active .menu-icon span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        .mobile-menu-btn.active .menu-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-btn.active .menu-icon span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Menu - NOUVEAU DESIGN */
+        .mobile-menu {
+            position: fixed;
+            top: 0; right: 0;
+            width: 280px;
+            max-width: 85vw;
+            height: 100vh;
+            background: var(--white);
+            z-index: 1002;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        .mobile-menu-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--gray-50);
+            flex-shrink: 0;
+        }
+        .mobile-menu-close {
+            width: 36px; height: 36px;
+            border: none;
+            background: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .mobile-menu-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem 0;
+            min-height: 0;
+        }
+        .mobile-link {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.875rem 1.25rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--gray-100);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .mobile-link:hover, .mobile-link.active {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent);
+            color: var(--primary);
+        }
+        .mobile-link i {
+            width: 20px;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        .mobile-menu-footer {
+            padding: 1.25rem;
+            border-top: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            flex-shrink: 0;
+        }
+        .mobile-cta-btn {
+            display: flex;
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .mobile-contact-info {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .mobile-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .mobile-contact-item i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 992px) {
+            .mobile-menu, .mobile-overlay, .mobile-menu-btn { display: none !important; }
+        }
+
+        /* ============================================
+           HERO
+        ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0 60px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.03) 0%, transparent 100%);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.875rem;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .badge-dot {
+            width: 6px; height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+        }
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin-bottom: 1.75rem;
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+        .btn-primary-custom {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 0.85rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px -10px rgba(99, 102, 241, 0.5);
+            color: white;
+        }
+        .btn-secondary-custom {
+            background: white;
+            border: 2px solid var(--gray-200);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-secondary-custom:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Hero Phone */
+        .hero-visual { position: relative; display: flex; justify-content: center; }
+        .hero-phone {
+            width: 240px; height: 480px;
+            background: linear-gradient(145deg, var(--gray-800), var(--gray-900));
+            border-radius: 36px;
+            padding: 8px;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
+            animation: floatPhone 5s ease-in-out infinite;
+        }
+        @keyframes floatPhone {
+            0%, 100% { transform: translateY(0) rotate(3deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        .phone-screen {
+            width: 100%; height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 8px; left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 22px;
+            background: var(--gray-900);
+            border-radius: 15px;
+        }
+        .phone-content {
+            position: absolute;
+            inset: 45px 14px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .phone-signal { display: flex; align-items: center; gap: 4px; }
+        .signal-bar { width: 3px; background: rgba(255,255,255,0.9); border-radius: 2px; }
+        .signal-bar:nth-child(1) { height: 5px; }
+        .signal-bar:nth-child(2) { height: 8px; }
+        .signal-bar:nth-child(3) { height: 11px; }
+        .signal-bar:nth-child(4) { height: 14px; }
+        .phone-5g {
+            margin-left: auto;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+        .phone-speed {
+            background: rgba(255,255,255,0.15);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            color: white;
+        }
+        .speed-value { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+        .speed-unit { font-size: 0.75rem; opacity: 0.9; margin-top: 2px; }
+        .phone-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .phone-feature {
+            background: rgba(255,255,255,0.12);
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 0.65rem;
+            color: white;
+        }
+        .phone-feature i { font-size: 1rem; display: block; margin-bottom: 3px; }
+
+        /* Floating Cards */
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: var(--shadow-lg);
+            animation: floatCard 4s ease-in-out infinite;
+            white-space: nowrap;
+            border: 1px solid var(--gray-100);
+        }
+        .floating-card-1 { top: 15%; left: -5%; animation-delay: 0s; }
+        .floating-card-2 { bottom: 25%; right: -10%; animation-delay: -1.5s; }
+        .floating-card-3 { bottom: 5%; left: 5%; animation-delay: -3s; }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .card-icon {
+            width: 36px; height: 36px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+        .card-icon.accent { background: var(--gradient-accent); }
+        .card-icon.success { background: linear-gradient(135deg, #10b981, #34d399); }
+        .card-content span { display: block; font-size: 0.65rem; color: var(--text-muted); }
+        .card-content strong { font-size: 0.85rem; color: var(--text-primary); }
+
+        @media (max-width: 1100px) {
+            .floating-card { display: none; }
+        }
+
+        /* ============================================
+           SECTIONS COMMON
+        ============================================ */
+        section { padding: 70px 0; position: relative; }
+        .section-header { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.875rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 0.875rem;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        .section-description { color: var(--text-secondary); font-size: 1rem; }
+
+        /* ============================================
+           SERVICES
+        ============================================ */
+        .services { background: var(--gray-50); }
+        .service-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon {
+            width: 54px; height: 54px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .service-features { list-style: none; padding: 0; margin: 0; }
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .service-features li i { color: var(--success); font-size: 0.8rem; }
+
+        /* ============================================
+           EVENTS SECTION - NOUVEAU
+        ============================================ */
+        .events { background: linear-gradient(180deg, #f0f4ff 0%, var(--gray-50) 100%); }
+        .events-grid { display: flex; gap: 1.25rem; overflow-x: auto; padding: 1rem 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+        .events-grid::-webkit-scrollbar { display: none; }
+        .event-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        .event-image {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+        }
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .event-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .event-image-placeholder.gradient-1 { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+        .event-image-placeholder.gradient-2 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .event-image-placeholder.gradient-3 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+        .event-image-placeholder.gradient-4 { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+        .event-image-placeholder h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .event-image-placeholder p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        .event-date-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.95);
+            padding: 0.4rem 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+        }
+        .event-date-badge i { color: var(--primary); }
+        .event-featured-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .event-content { padding: 1rem 1.25rem 1.25rem; }
+        .event-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--gray-100);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .event-tag i { font-size: 0.65rem; }
+        .event-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 4px;
+            font-size: 0.65rem;
+            color: var(--success);
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .event-status i { font-size: 0.6rem; }
+        .event-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .event-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .event-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .event-link:hover { color: var(--primary-dark); gap: 0.5rem; }
+
+        /* ============================================
+           FEATURES
+        ============================================ */
+        .features { background: white; }
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; align-items: center; }
+        .feature-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .feature-content > p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        .feature-list { display: flex; flex-direction: column; gap: 0.875rem; }
+        .feature-item {
+            display: flex;
+            gap: 0.875rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            background: white;
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
+            transform: translateX(6px);
+        }
+        .feature-icon {
+            width: 44px; height: 44px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .feature-text h4 { font-weight: 600; margin-bottom: 0.2rem; font-size: 0.95rem; }
+        .feature-text p { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+
+        /* Network Animation */
+        .feature-visual { display: flex; justify-content: center; }
+        .network-animation { width: 300px; height: 300px; position: relative; }
+        .network-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px; height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+            box-shadow: var(--shadow-primary);
+            z-index: 2;
+        }
+        .network-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid var(--gray-200);
+            border-radius: 50%;
+            animation: pulseRing 3s ease-out infinite;
+        }
+        .network-ring:nth-child(1) { width: 150px; height: 150px; animation-delay: 0s; }
+        .network-ring:nth-child(2) { width: 220px; height: 220px; animation-delay: 0.5s; }
+        .network-ring:nth-child(3) { width: 290px; height: 290px; animation-delay: 1s; }
+        @keyframes pulseRing {
+            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .network-node {
+            position: absolute;
+            width: 40px; height: 40px;
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+        .network-node:nth-child(4) { top: 0; left: 50%; transform: translateX(-50%); }
+        .network-node:nth-child(5) { top: 50%; right: 0; transform: translateY(-50%); }
+        .network-node:nth-child(6) { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .network-node:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); }
+
+        @media (max-width: 992px) {
+            .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .feature-visual { order: -1; }
+            .network-animation { width: 250px; height: 250px; }
+        }
+
+        /* ============================================
+           STATS
+        ============================================ */
+        .stats {
+            background: var(--gradient-primary);
+            padding: 50px 0;
+        }
+        .stat-item { text-align: center; padding: 1rem; }
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+        .stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.9); }
+
+        /* ============================================
+           PRICING
+        ============================================ */
+        .pricing { background: var(--gray-50); }
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .toggle-label { color: var(--text-muted); font-weight: 500; font-size: 0.9rem; }
+        .toggle-label.active { color: var(--text-primary); }
+        .toggle-switch {
+            width: 50px; height: 26px;
+            background: var(--gray-200);
+            border-radius: 50px;
+            position: relative;
+            cursor: pointer;
+        }
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px; left: 3px;
+            width: 20px; height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .toggle-switch.active::after { left: calc(100% - 23px); }
+        .pricing-save {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .pricing-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-xl);
+        }
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .pricing-badge {
+            position: absolute;
+            top: -10px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .pricing-header { text-align: center; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--gray-200); }
+        .pricing-name { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .pricing-description { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.875rem; }
+        .pricing-price { display: flex; align-items: flex-start; justify-content: center; gap: 0.2rem; }
+        .pricing-currency { font-size: 1.1rem; font-weight: 600; color: var(--text-secondary); margin-top: 0.4rem; }
+        .pricing-amount { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 700; line-height: 1; }
+        .pricing-period { color: var(--text-muted); font-size: 0.85rem; align-self: flex-end; margin-bottom: 0.4rem; }
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .pricing-features li i { color: var(--success); }
+        .pricing-features li.disabled { color: var(--text-muted); opacity: 0.5; }
+        .pricing-features li.disabled i { color: var(--text-muted); }
+        .btn-pricing {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-pricing-primary {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            box-shadow: var(--shadow-primary);
+        }
+        .btn-pricing-primary:hover { color: white; }
+        .btn-pricing-secondary {
+            background: transparent;
+            border: 2px solid var(--gray-200);
+            color: var(--text-primary);
+        }
+        .btn-pricing-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* ============================================
+           TESTIMONIALS
+        ============================================ */
+        .testimonials { background: white; }
+        .testimonials-slider {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        .testimonials-slider::-webkit-scrollbar { display: none; }
+        .testimonial-card {
+            min-width: 300px;
+            max-width: 300px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            scroll-snap-align: center;
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            background: white;
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+        .testimonial-rating { display: flex; gap: 0.15rem; margin-bottom: 0.875rem; }
+        .testimonial-rating i { color: var(--warning); font-size: 0.85rem; }
+        .testimonial-text {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+        .author-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .author-info h5 { font-weight: 600; margin-bottom: 0.1rem; font-size: 0.9rem; }
+        .author-info span { color: var(--text-muted); font-size: 0.75rem; }
+
+        /* ============================================
+           CTA
+        ============================================ */
+        .cta { background: var(--gray-50); padding: 60px 0; }
+        .cta-box {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        .cta-box h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.4rem, 4vw, 1.75rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .cta-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto 1.25rem;
+        }
+
+        /* ============================================
+           CONTACT
+        ============================================ */
+        .contact { background: white; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2.5rem; }
+        .contact-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .contact-info > p { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7; }
+        .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-item { display: flex; align-items: center; gap: 0.875rem; }
+        .contact-icon {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+        .contact-text strong { display: block; margin-bottom: 0.1rem; font-size: 0.9rem; }
+        .contact-text span { color: var(--text-muted); font-size: 0.85rem; }
+        .contact-form-wrapper {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: 1.75rem;
+        }
+        .form-floating { margin-bottom: 1rem; }
+        .form-floating > .form-control,
+        .form-floating > .form-select {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+        }
+        .form-floating > .form-control:focus,
+        .form-floating > .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+        .form-floating > label { color: var(--text-muted); font-size: 0.9rem; }
+        textarea.form-control { min-height: 90px; }
+
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 50px 0 25px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .footer-brand .navbar-brand { color: white !important; margin-bottom: 0.875rem; display: inline-flex; }
+        .footer-brand p { color: var(--gray-400); margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.85rem; }
+        .social-links { display: flex; gap: 0.6rem; }
+        .social-link {
+            width: 36px; height: 36px;
+            background: var(--gray-800);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .footer-column h5 { font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: var(--gray-400); font-size: 0.85rem; }
+        .footer-links a:hover { color: white; padding-left: 4px; }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-500);
+            font-size: 0.8rem;
+        }
+        .footer-bottom-links { display: flex; gap: 1.25rem; }
+        .footer-bottom-links a { color: var(--gray-500); }
+        .footer-bottom-links a:hover { color: white; }
+
+        @media (max-width: 992px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 80px 0 40px; min-height: auto; }
+            .hero-content { text-align: center; }
+            .hero-description { margin: 0 auto 1.5rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { margin-top: 2rem; }
+            .hero-phone { width: 200px; height: 400px; }
+            section { padding: 50px 0; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-links { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+            .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+        }
+        @media (max-width: 576px) {
+            .hero-title { font-size: 1.6rem; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn-primary-custom, .btn-secondary-custom { width: 100%; justify-content: center; }
+            .event-card { min-width: 260px; max-width: 260px; }
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Background -->
+    <div class="bg-animated">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a class="navbar-brand" href="#">
+                <div class="brand-icon"><i class="bi bi-broadcast"></i></div>
+                ConnectX
+            </a>
+            <button class="mobile-menu-close" id="mobileClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-body">
+            <a href="#accueil" class="mobile-link active"><i class="bi bi-house"></i> Accueil</a>
+            <a href="#services" class="mobile-link"><i class="bi bi-grid-3x3-gap"></i> Services</a>
+            <a href="#evenements" class="mobile-link"><i class="bi bi-calendar-event"></i> Evenements</a>
+            <a href="#fonctionnalites" class="mobile-link"><i class="bi bi-lightning-charge"></i> Fonctionnalites</a>
+            <a href="#tarifs" class="mobile-link"><i class="bi bi-tag"></i> Tarifs</a>
+            <a href="#contact" class="mobile-link"><i class="bi bi-envelope"></i> Contact</a>
+        </div>
+        <div class="mobile-menu-footer">
+            <a href="#contact" class="mobile-cta-btn">
+                <i class="bi bi-telephone"></i> Nous contacter
+            </a>
+            <div class="mobile-contact-info">
+                <div class="mobile-contact-item">
+                    <i class="bi bi-telephone"></i> 0 800 123 456
+                </div>
+                <div class="mobile-contact-item">
+                    <i class="bi bi-envelope"></i> contact@connectx.fr
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar-custom" id="navbar">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <a class="navbar-brand" href="#">
+                    <div class="brand-icon"><i class="bi bi-broadcast"></i></div>
+                    ConnectX
+                </a>
+
+                <ul class="navbar-nav d-flex flex-row gap-1 desktop-nav">
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#accueil">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#evenements">Evenements</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#tarifs">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="#contact" class="btn btn-nav desktop-nav">
+                        <i class="bi bi-telephone me-1"></i> Contact
+                    </a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <div class="menu-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content" data-aos="fade-up">
+                        <div class="hero-badge">
+                            <span class="badge-dot"></span>
+                            Operateur Telecom Nouvelle Generation
+                        </div>
+                        <h1 class="hero-title">
+                            Connectez-vous au <span class="gradient-text">futur</span> des telecommunications
+                        </h1>
+                        <p class="hero-description">
+                            Decouvrez une experience de connectivite inegalee avec nos solutions 5G ultra-rapides, notre reseau fibre optique et nos forfaits adaptes.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#tarifs" class="btn-primary-custom">
+                                <i class="bi bi-rocket-takeoff"></i> Voir nos offres
+                            </a>
+                            <a href="#services" class="btn-secondary-custom">
+                                <i class="bi bi-play-circle"></i> Decouvrir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual" data-aos="fade-up" data-aos-delay="200">
+                        <div class="hero-phone">
+                            <div class="phone-screen">
+                                <div class="phone-notch"></div>
+                                <div class="phone-content">
+                                    <div class="phone-signal">
+                                        <div class="signal-bar"></div>
+                                        <div class="signal-bar"></div>
+                                        <div class="signal-bar"></div>
+                                        <div class="signal-bar"></div>
+                                        <span class="phone-5g">5G+</span>
+                                    </div>
+                                    <div class="phone-speed">
+                                        <div class="speed-value">1.8</div>
+                                        <div class="speed-unit">Gbps</div>
+                                    </div>
+                                    <div class="phone-features">
+                                        <div class="phone-feature"><i class="bi bi-wifi"></i> WiFi 7</div>
+                                        <div class="phone-feature"><i class="bi bi-shield-check"></i> Securise</div>
+                                        <div class="phone-feature"><i class="bi bi-infinity"></i> Illimite</div>
+                                        <div class="phone-feature"><i class="bi bi-headset"></i> 24/7</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating-card floating-card-1">
+                            <div class="card-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div class="card-content"><span>Debit max</span><strong>10 Gbps</strong></div>
+                        </div>
+                        <div class="floating-card floating-card-2">
+                            <div class="card-icon accent"><i class="bi bi-globe2"></i></div>
+                            <div class="card-content"><span>Couverture</span><strong>99.9%</strong></div>
+                        </div>
+                        <div class="floating-card floating-card-3">
+                            <div class="card-icon success"><i class="bi bi-lightning-charge"></i></div>
+                            <div class="card-content"><span>Latence</span><strong>< 1ms</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge"><i class="bi bi-stars"></i> Nos Services</span>
+                <h2 class="section-title">Solutions telecom completes</h2>
+                <p class="section-description">Des solutions innovantes pour particuliers et entreprises.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-phone"></i></div>
+                        <h3>Forfaits Mobile 5G</h3>
+                        <p>Profitez de la puissance du reseau 5G avec nos forfaits mobiles ultra-performants.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Internet 5G illimite</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels & SMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Roaming international</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-router"></i></div>
+                        <h3>Fibre Optique</h3>
+                        <p>La fibre optique jusqu'a 10 Gbps pour une connexion internet ultra-rapide.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Debit jusqu'a 10 Gbps</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Installation gratuite</li>
+                            <li><i class="bi bi-check-circle-fill"></i> WiFi 7 inclus</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-building"></i></div>
+                        <h3>Solutions Entreprise</h3>
+                        <p>Des solutions sur mesure pour les PME et grandes entreprises.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Liaisons dediees</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Cloud & Hebergement</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support prioritaire</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-tv"></i></div>
+                        <h3>TV & Streaming</h3>
+                        <p>Plus de 200 chaines et acces aux meilleures plateformes de streaming.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 200+ chaines HD/4K</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Replay 30 jours</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Multi-ecrans</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-shield-lock"></i></div>
+                        <h3>Cybersecurite</h3>
+                        <p>Protection complete de vos donnees et appareils connectes.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Antivirus premium</li>
+                            <li><i class="bi bi-check-circle-fill"></i> VPN securise</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Controle parental</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="bi bi-house-gear"></i></div>
+                        <h3>Maison Connectee</h3>
+                        <p>Transformez votre maison en smart home avec nos solutions IoT.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Hub domotique</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Cameras connectees</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Thermostats intelligents</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="evenements">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge"><i class="bi bi-calendar-event"></i> Nos Evenements</span>
+                <h2 class="section-title">Nos prochains Evenements</h2>
+                <p class="section-description">Decouvrez nos webinaires, conferences et ateliers a venir.</p>
+            </div>
+            <div class="events-grid" data-aos="fade-up">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-image-placeholder gradient-1">
+                            <h4>5G Revolution</h4>
+                            <p>L'avenir des telecommunications mobiles</p>
+                        </div>
+                        <span class="event-featured-badge">A la une</span>
+                        <div class="event-date-badge">
+                            <i class="bi bi-calendar3"></i> 5 Fevrier
+                            <i class="bi bi-clock ms-2"></i> 14h
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div>
+                            <span class="event-tag"><i class="bi bi-camera-video"></i> Webconference</span>
+                            <span class="event-status"><i class="bi bi-clock"></i> A venir</span>
+                        </div>
+                        <div class="event-category">Innovation & Technologie</div>
+                        <h3 class="event-title">Webinaire - 5G Revolution : decouvrez les nouvelles opportunites</h3>
+                        <a href="#" class="event-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-image-placeholder gradient-2">
+                            <h4>Cockpit Data</h4>
+                            <p>Pilotez votre performance avec la data</p>
+                        </div>
+                        <div class="event-date-badge">
+                            <i class="bi bi-calendar3"></i> 12 Fevrier
+                            <i class="bi bi-clock ms-2"></i> 11h30
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div>
+                            <span class="event-tag"><i class="bi bi-people"></i> Atelier</span>
+                            <span class="event-status"><i class="bi bi-clock"></i> A venir</span>
+                        </div>
+                        <div class="event-category">Data & Analytics</div>
+                        <h3 class="event-title">Atelier pratique : maitrisez votre tableau de bord data</h3>
+                        <a href="#" class="event-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-image-placeholder gradient-3">
+                            <h4>Cybersecurite</h4>
+                            <p>Protegez votre entreprise</p>
+                        </div>
+                        <div class="event-date-badge">
+                            <i class="bi bi-calendar3"></i> 20 Fevrier
+                            <i class="bi bi-clock ms-2"></i> 10h
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div>
+                            <span class="event-tag"><i class="bi bi-camera-video"></i> Webinaire</span>
+                            <span class="event-status"><i class="bi bi-clock"></i> A venir</span>
+                        </div>
+                        <div class="event-category">Securite & Protection</div>
+                        <h3 class="event-title">Webinaire - Les bonnes pratiques cybersecurite en 2026</h3>
+                        <a href="#" class="event-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-image-placeholder gradient-4">
+                            <h4>Fibre Pro</h4>
+                            <p>Solutions entreprise haute performance</p>
+                        </div>
+                        <div class="event-date-badge">
+                            <i class="bi bi-calendar3"></i> 28 Fevrier
+                            <i class="bi bi-clock ms-2"></i> 15h
+                        </div>
+                    </div>
+                    <div class="event-content">
+                        <div>
+                            <span class="event-tag"><i class="bi bi-building"></i> Conference</span>
+                            <span class="event-status"><i class="bi bi-clock"></i> A venir</span>
+                        </div>
+                        <div class="event-category">Solutions Entreprise</div>
+                        <h3 class="event-title">Conference - Fibre entreprise : boostez votre productivite</h3>
+                        <a href="#" class="event-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="fonctionnalites">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-content" data-aos="fade-right">
+                    <span class="section-badge"><i class="bi bi-lightning-charge"></i> Technologie</span>
+                    <h2>Un reseau de <span class="gradient-text">nouvelle generation</span></h2>
+                    <p>Notre infrastructure de pointe vous garantit une connectivite exceptionnelle, ou que vous soyez.</p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
+                            <div class="feature-text">
+                                <h4>Ultra Haut Debit</h4>
+                                <p>Jusqu'a 10 Gbps en fibre et 1.8 Gbps en 5G</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="bi bi-globe-americas"></i></div>
+                            <div class="feature-text">
+                                <h4>Couverture Nationale</h4>
+                                <p>99.9% du territoire couvert par notre reseau</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+                            <div class="feature-text">
+                                <h4>Latence Minimale</h4>
+                                <p>Moins d'1ms pour une reactivite optimale</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-visual" data-aos="fade-left">
+                    <div class="network-animation">
+                        <div class="network-ring"></div>
+                        <div class="network-ring"></div>
+                        <div class="network-ring"></div>
+                        <div class="network-node"><i class="bi bi-phone"></i></div>
+                        <div class="network-node"><i class="bi bi-laptop"></i></div>
+                        <div class="network-node"><i class="bi bi-tv"></i></div>
+                        <div class="network-node"><i class="bi bi-smartwatch"></i></div>
+                        <div class="network-center"><i class="bi bi-broadcast"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="5">0</div>
+                        <div class="stat-label">Millions de clients</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="99.9">0</div>
+                        <div class="stat-label">% de disponibilite</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="50">0</div>
+                        <div class="stat-label">Pays couverts</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <div class="stat-value" data-count="24">0</div>
+                        <div class="stat-label">Support 24h/7j</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="tarifs">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge"><i class="bi bi-tag"></i> Tarifs</span>
+                <h2 class="section-title">Des forfaits adaptes a vos besoins</h2>
+                <p class="section-description">Choisissez l'offre qui vous correspond parmi nos forfaits sans engagement.</p>
+            </div>
+            <div class="pricing-toggle" data-aos="fade-up">
+                <span class="toggle-label active">Mensuel</span>
+                <div class="toggle-switch" id="pricingToggle"></div>
+                <span class="toggle-label">Annuel</span>
+                <span class="pricing-save">-20%</span>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Essentiel</h3>
+                            <p class="pricing-description">Ideal pour une utilisation basique</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="19" data-yearly="15">19</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 50 Go 5G</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites France</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 5 Go Europe</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> Roaming monde</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-secondary">Choisir</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card featured">
+                        <span class="pricing-badge">Populaire</span>
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Premium</h3>
+                            <p class="pricing-description">Notre offre la plus populaire</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="39" data-yearly="31">39</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 150 Go 5G</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites France</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 20 Go Europe</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support prioritaire</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-primary">Choisir</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-name">Ultimate</h3>
+                            <p class="pricing-description">Pour les utilisateurs intensifs</p>
+                            <div class="pricing-price">
+                                <span class="pricing-currency">EUR</span>
+                                <span class="pricing-amount" data-monthly="59" data-yearly="47">59</span>
+                                <span class="pricing-period">/mois</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Data 5G illimitee</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Appels illimites monde</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMS/MMS illimites</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 50 Go Europe</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Support VIP 24/7</li>
+                        </ul>
+                        <button class="btn btn-pricing btn-pricing-secondary">Choisir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge"><i class="bi bi-chat-quote"></i> Temoignages</span>
+                <h2 class="section-title">Ce que disent nos clients</h2>
+            </div>
+            <div class="testimonials-slider" data-aos="fade-up">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"Depuis que je suis passe chez ConnectX, ma connexion est incroyablement rapide. Le service client est reactif et les prix sont competitifs."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ML</div>
+                        <div class="author-info"><h5>Marie Laurent</h5><span>Freelance Designer</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"La fibre ConnectX a transforme notre facon de travailler. Nous avons enfin une connexion a la hauteur de nos ambitions."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PD</div>
+                        <div class="author-info"><h5>Pierre Dubois</h5><span>Directeur Tech</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                    </div>
+                    <p class="testimonial-text">"Excellent rapport qualite-prix ! La 5G est vraiment rapide et la couverture est parfaite meme dans les zones rurales."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SB</div>
+                        <div class="author-info"><h5>Sophie Bernard</h5><span>Veterinaire</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"L'installation de la fibre a ete rapide et professionnelle. Je recommande vivement ConnectX pour la qualite de leur service."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info"><h5>Jean Martin</h5><span>Gamer Pro</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box" data-aos="zoom-in">
+                <h2>Pret a rejoindre la <span class="gradient-text">revolution</span> ?</h2>
+                <p>Souscrivez des maintenant et beneficiez de 3 mois offerts sur votre premier forfait.</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#tarifs" class="btn-primary-custom"><i class="bi bi-rocket-takeoff"></i> Souscrire</a>
+                    <a href="#contact" class="btn-secondary-custom"><i class="bi bi-telephone"></i> Etre rappele</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Contactez-nous</h3>
+                    <p>Notre equipe est disponible pour repondre a toutes vos questions.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
+                            <div class="contact-text"><strong>Adresse</strong><span>123 Avenue des Telecoms, 75001 Paris</span></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+                            <div class="contact-text"><strong>Telephone</strong><span>0 800 123 456 (gratuit)</span></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                            <div class="contact-text"><strong>Email</strong><span>contact@connectx.fr</span></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="bi bi-clock"></i></div>
+                            <div class="contact-text"><strong>Horaires</strong><span>Lun-Sam: 8h-20h</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="firstName" placeholder="Prenom" required>
+                                    <label for="firstName">Prenom</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="lastName" placeholder="Nom" required>
+                                    <label for="lastName">Nom</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="subject" required>
+                                <option value="" disabled selected>Choisir</option>
+                                <option value="forfait">Forfaits</option>
+                                <option value="fibre">Fibre</option>
+                                <option value="support">Support</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <label for="subject">Sujet</label>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" placeholder="Message" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <button type="submit" class="btn-primary-custom w-100"><i class="bi bi-send"></i> Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="navbar-brand" href="#">
+                        <div class="brand-icon"><i class="bi bi-broadcast"></i></div>
+                        ConnectX
+                    </a>
+                    <p>Votre partenaire de confiance pour tous vos besoins en telecommunications.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Forfaits Mobile</a></li>
+                        <li><a href="#">Fibre Optique</a></li>
+                        <li><a href="#">TV & Streaming</a></li>
+                        <li><a href="#">Entreprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Entreprise</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">Carrieres</a></li>
+                        <li><a href="#">Presse</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ConnectX. Tous droits reserves.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions legales</a>
+                    <a href="#">Confidentialite</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // AOS
+        AOS.init({ duration: 600, easing: 'ease-out', once: true, offset: 50 });
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 200);
+        });
+
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 30);
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileClose = document.getElementById('mobileClose');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileClose.addEventListener('click', closeMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 70;
+                    window.scrollTo({
+                        top: target.offsetTop - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Pricing toggle
+        const pricingToggle = document.getElementById('pricingToggle');
+        const toggleLabels = document.querySelectorAll('.toggle-label');
+        const priceAmounts = document.querySelectorAll('.pricing-amount');
+
+        pricingToggle.addEventListener('click', () => {
+            pricingToggle.classList.toggle('active');
+            toggleLabels.forEach(l => l.classList.toggle('active'));
+            const isYearly = pricingToggle.classList.contains('active');
+            priceAmounts.forEach(a => {
+                a.textContent = isYearly ? a.dataset.yearly : a.dataset.monthly;
+            });
+        });
+
+        // Stats counter
+        const statValues = document.querySelectorAll('.stat-value');
+        const animateCounter = (el, target) => {
+            const duration = 1500;
+            const start = performance.now();
+            const isDecimal = target % 1 !== 0;
+            const update = (currentTime) => {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                el.textContent = isDecimal ? (target * easeOut).toFixed(1) : Math.floor(target * easeOut);
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = isDecimal ? target.toFixed(1) : target;
+            };
+            requestAnimationFrame(update);
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target, parseFloat(entry.target.dataset.count));
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statValues.forEach(stat => statsObserver.observe(stat));
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci ! Nous vous recontacterons rapidement.');
+            e.target.reset();
+        });
+
+        console.log('ConnectX - Site charge!');
+    </script>
+</body>
+</html>
